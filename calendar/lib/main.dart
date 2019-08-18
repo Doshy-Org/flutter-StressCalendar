@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:calendar/cal.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget{
@@ -9,15 +9,7 @@ class MyApp extends StatelessWidget{
     return new MaterialApp(
       title:'Calendar',
 
-      home: new Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pink[100],
-          title: Text('Stress Calendar')
-        ),
-        body: Center(
-          child: Text('Calendar Coming Soon'),
-        ),
-      ),
+      home:CalHome(), 
     );
   }
 }
