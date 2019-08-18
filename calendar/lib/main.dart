@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget{
 
       home: new Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.pink[100],
+          backgroundColor: Colors.pink[150],
           title: Text('Stress Calendar')
         ),
         body: Center(
