@@ -3,6 +3,7 @@ import 'package:calendar/calendar.dart';
 
 class CalHome extends StatelessWidget {
   var rows;
+  List<int> tempArray = new List();
   @override
   Widget build (BuildContext ctxt) {
     return new Scaffold(
@@ -30,9 +31,18 @@ class CalHome extends StatelessWidget {
               ),
               Padding(   //calendar goes here, make into seperate object so we can generate
                 padding: const EdgeInsets.only(top: 20),
-                child: Container( 
-
-                ),
+              ),
+              ListView.builder(
+                itemCount: tempArray.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Card(
+                    child: Column(children: <Widget>[
+                      const ListTile(
+                          title: Text("Month Name index"),
+                        ),
+                      ],),
+                    );
+                }
               )
             ],
           ),
