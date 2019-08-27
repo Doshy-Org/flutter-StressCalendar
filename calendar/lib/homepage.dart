@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:calendar/calendar.dart';
 
 class CalHome extends StatelessWidget {
-  var rows
+  var rows;
   @override
   Widget build (BuildContext ctxt) {
     return new Scaffold(
@@ -42,4 +43,6 @@ class CalHome extends StatelessWidget {
     );
   }
 }
+
+
 
