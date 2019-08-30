@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "0.1.2"
   date_utils:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: date_utils
       url: "https://pub.dartlang.org"
@@ -48,20 +48,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_calendar:
-    dependency: "direct main"
-    description:
-      name: flutter_calendar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.8"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -149,13 +142,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.5"
-  tuple:
-    dependency: transitive
-    description:
-      name: tuple
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   typed_data:
     dependency: transitive
     description:
