@@ -25,7 +25,7 @@ const TextStyle defaultSelectedDayTextStyle = const TextStyle(
 	fontSize: 14.0,
 );
 const TextStyle defaultWeekdayTextStyle = const TextStyle(
-	color: Colors.deepOrange,
+	color: Colors.black,
 	fontSize: 14.0,
 );
 const TextStyle defaultWeekendTextStyle = const TextStyle(
