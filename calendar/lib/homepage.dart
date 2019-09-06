@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:calendar/calendar.dart';
 //import 'calendar/index.dart';
 
+import 'package:calendar/eventsPage.dart';
 //import 'package:flutter/material.dart';
 
 import 'package:calendar/flutter_calendar_carousel.dart'
@@ -38,11 +39,11 @@ class _CalHomeState extends State<CalHome>{
         return event.icon;
       },
       todayTextStyle: TextStyle(
-        color: Colors.blue,
+        color: Colors.indigo[900],
       ),
-      todayButtonColor: Colors.yellow,
+      todayButtonColor: Colors.pink[100],
       selectedDayTextStyle: TextStyle(
-        color: Colors.yellow,
+        color: Colors.pink[100],
       ),
   );
     return new Scaffold(
@@ -67,17 +68,27 @@ class _CalHomeState extends State<CalHome>{
                 ],)
               ),
               Container(
-                child: _calendarCarouselNoHeader,
+                child: SizedBox(height:45), 
+                //this is space between Good Morning and Calendar
               ),
               Container(
                 child: _calendarCarouselNoHeader,
               ),
+
               Container(
-                child: _calendarCarouselNoHeader,
+                child: MaterialButton(
+                  child: Text("UwU in"),
+                  color: Colors.pink[200],
+                  shape: StadiumBorder(),
+                  elevation: 2,
+                  onPressed: (){
+                    Navigator.push(
+                      ctxt,
+                      SlideRightRoute(page: eventsPage()),
+                    );
+                  }
+                ),
               ),
-              Container(
-                child: _calendarCarouselNoHeader,
-              )
               //new TempCal(title: "ree",),
               // ListView.builder(
               //   itemCount: tempArray.length,
@@ -99,6 +110,32 @@ class _CalHomeState extends State<CalHome>{
       )
     );
   }
+}
+
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideRightRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(1, 0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ),
+        );
 }
 
 
