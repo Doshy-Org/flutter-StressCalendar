@@ -77,7 +77,7 @@ class _CalHomeState extends State<CalHome>{
 
               Container(
                 child: MaterialButton(
-                  child: Text("UwU in"),
+                  child: Text("View Details"),
                   color: Colors.pink[200],
                   shape: StadiumBorder(),
                   elevation: 2,
