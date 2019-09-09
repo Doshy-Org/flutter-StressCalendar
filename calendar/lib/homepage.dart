@@ -16,37 +16,14 @@ class CalHome extends StatefulWidget {
   _CalHomeState createState() => _CalHomeState();
   //List<int> tempArray = new List();
 }
- CalendarCarousel _calendarCarouselNoHeader;
+ //CalendarCarousel _calendarCarouselNoHeader;
 class _CalHomeState extends State<CalHome>{
  
   @override
   Widget build (BuildContext ctxt) {
-     _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      todayBorderColor: Colors.green,
-      weekendTextStyle: TextStyle(
-        color: Colors.red,
-      ),
-      thisMonthDayBorderColor: Colors.grey,
-      weekFormat: false,
-      height: 420.0,
-      customGridViewPhysics: NeverScrollableScrollPhysics(),
-      markedDateShowIcon: true,
-      markedDateIconMaxShown: 2,
-      markedDateMoreShowTotal:
-          false, // null for not showing hidden events indicator
-      showHeader: false,
-      markedDateIconBuilder: (event) {
-        return event.icon;
-      },
-      todayTextStyle: TextStyle(
-        color: Colors.indigo[900],
-      ),
-      todayButtonColor: Colors.pink[100],
-      selectedDayTextStyle: TextStyle(
-        color: Colors.pink[100],
-      ),
-  );
+    
     return new Scaffold(
+      backgroundColor: Colors.white,
       body: (
         Center(
           child: Container(
@@ -57,7 +34,7 @@ class _CalHomeState extends State<CalHome>{
               Container(
                 child: Column(children: <Widget>[
                   Image.asset('assets/temp_bg.png'),
-                  Text("Good Morning StresDevs", 
+                  Text("Good Morning", 
                     textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 25), 
                   ),
@@ -72,7 +49,7 @@ class _CalHomeState extends State<CalHome>{
                 //this is space between Good Morning and Calendar
               ),
               Container(
-                child: _calendarCarouselNoHeader,
+                child: new CircleButton(onTap: () => print("Cool"), iconData: Icons.favorite_border),
               ),
 
               Container(
@@ -138,6 +115,75 @@ class SlideRightRoute extends PageRouteBuilder {
         );
 }
 
+// class Calendar extends StatefulWidget{
+//   @override
+//     // TODO: implement createState
+//     _CalState createState() => _CalState();
+// }
+ CalendarCarousel _calendarCarouselNoHeader;
+class Calendar extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    //  _calendarCarouselNoHeader = CalendarCarousel<Event>(
+    //   todayBorderColor: Colors.green,
+    //   weekendTextStyle: TextStyle(
+    //     color: Colors.red,
+    //   ),
+    //   thisMonthDayBorderColor: Colors.grey,
+    //   weekFormat: false,
+    //   height: 420.0,
+    //   customGridViewPhysics: NeverScrollableScrollPhysics(),
+    //   markedDateShowIcon: true,
+    //   markedDateIconMaxShown: 2,
+    //   markedDateMoreShowTotal:
+    //       false, // null for not showing hidden events indicator
+    //   showHeader: false,
+    //   markedDateIconBuilder: (event) {
+    //     return event.icon;
+    //   },
+    //   todayTextStyle: TextStyle(
+    //     color: Colors.indigo[900],
+    //   ),
+    //   todayButtonColor: Colors.pink[100],
+    //   selectedDayTextStyle: TextStyle(
+    //     color: Colors.pink[100],
+    //   ),
+    // );
+
+    return new Center(
+        child: Container(
+          child: Text("data"),
+        ),
+      );
+  }
+}
 
 
+//https://stackoverflow.com/questions/50522237/flutter-circle-design
+class CircleButton extends StatelessWidget {
+  final GestureTapCallback onTap;
+  final IconData iconData;
 
+  const CircleButton({Key key, this.onTap, this.iconData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double size = 50.0;
+
+    return new InkResponse(
+      onTap: onTap,
+      child: new Container(
+        width: size,
+        height: size,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: new Icon(
+          iconData,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
