@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:calendar/event.dart';
 
-BoxDecoration customcard(){
-  return BoxDecoration(
-    border: Border.all(
-      color: Color.fromRGBO(234, 234, 234,1),
-      width: 2,
-    ),
-  
-    borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
-  );
-}
 class eventsPage extends StatelessWidget {
+
+  EventList events = new EventList();
+  
   @override
   Widget build(BuildContext ctxt)
   {//signals that enemies are missing
@@ -55,17 +49,12 @@ class eventsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
                         child: new Column(
                           children: <Widget>[
-                            new Row(  //put in another file xd
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                              Text("Do Some Hw", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                              SizedBox(),
-                              SizedBox(),  //xd idk abt this
-                              SizedBox(),
-                              Text(".", textAlign: TextAlign.right, style: TextStyle(fontSize: 24),),
-                              Text(".", textAlign: TextAlign.right, style: TextStyle(fontSize: 24),),
-                            ],
-                            ),
+                            
+                              new EventLi(),
+
+                              // for(int i = 0; i< events.size(); i++){
+                              //   new EventLi();
+                              // }
                           ],
                         ),
                     ),
@@ -90,22 +79,32 @@ class eventsPage extends StatelessWidget {
                               SizedBox(),
                               
                               Text(".", textAlign: TextAlign.right, style: TextStyle(fontSize: 24),),
+
+                              
                             ],
                             ),
                           ],
                         ),
                     ),
+
+                    
                   ],
+                  
                 ),
               )
-             
             ],
         
       
         ), 
         
-      
       ),
+      floatingActionButton: FloatingActionButton(
+            onPressed:(){
+              events.addEvent(new NewEvent("owo","uwu",2,2));
+            },
+            child: Icon(Icons.add),
+             backgroundColor: Colors.pink[200],
+       ), 
     );
 
 
