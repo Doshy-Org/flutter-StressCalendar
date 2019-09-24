@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   intl: ^0.15.7
   date_utils: ^0.1.0
+  swipedetector: ^1.2.0
 
 dev_dependencies:
   flutter_test:

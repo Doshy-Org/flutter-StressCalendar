@@ -12,27 +12,24 @@ BoxDecoration customcard(){
 }
 
 class EventLi extends StatelessWidget {
-  // final String name;
-  // final int i;
-  // final int s;
-  const EventLi({Key key}) : super(key: key);
+  final EventInstance even;
+  const EventLi({Key key, this.even}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double size = 50.0;
 
     return Container(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: new Column(
         children: <Widget>[
           new Row(  //put in another file xd
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-            Text("owo", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-            SizedBox(),
-            SizedBox(),  //xd idk abt this
-            SizedBox(),
-            
-            Text(".", textAlign: TextAlign.right, style: TextStyle(fontSize: 24),),
+            Text(even.getTitle(), textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+            Spacer(),
+            new CircleButton(onTap: () => print("Cool")),
+            new SizedBox(width:30),
+            new CircleButton(onTap: () => print("Cool")),
           ],
           ),
         ],
@@ -41,23 +38,45 @@ class EventLi extends StatelessWidget {
   }
 }
 
+class CircleButton extends StatelessWidget {
+  final GestureTapCallback onTap;
+  //final Color col;
 
+  const CircleButton({Key key, this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double size = 20.0;
+    return new InkResponse(
+      onTap: onTap,
+      child: new Container(
+        width: size,
+        height: size,
+        decoration: new BoxDecoration(
+          color: Colors.green,
+          shape: BoxShape.circle,
+        ),
+      ),
+    );
+  }
+}
 
 class EventList{
   @override
-  List<NewEvent> events;
+  List<EventInstance> events;
   
   EventList()
   {
-    events = new List<NewEvent>();
+    events = new List<EventInstance>();
+    events.add(new EventInstance("ree","ree",1,1));
   }
 
-  void addEvent(NewEvent ree)
+  void addEvent(EventInstance ree)
   {
     events.add(ree);
   }
 
-  void deleteEvent(NewEvent ree)
+  void deleteEvent(EventInstance ree)
   {
     events.remove(ree);
   }
@@ -65,17 +84,22 @@ class EventList{
   {
     return events.length;
   }
+  
+  EventInstance getValue(int index)
+  {
+    return events[index];
+  }
 
 
 }  
-class NewEvent
+class EventInstance
 {
   String eventTitle; 
   String eventDescription;
   int stress; //percieved stress
   int actualStress; //experienced stress
   int importance;
-  NewEvent(String title, String descip, int s, int i)
+  EventInstance(String title, String descip, int s, int i)
   {
     eventTitle = title;
     eventDescription = descip;

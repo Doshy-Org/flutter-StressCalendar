@@ -1,11 +1,20 @@
+import 'package:calendar/classes/event.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
 
-class eventsPage extends StatelessWidget {
+class eventsPage extends StatefulWidget{
+  @override
+  State createState() => new _eventsPageState();
+}
+class _eventsPageState extends State<eventsPage>  {
 
   EventList events = new EventList();
-  
+
   @override
+   void initState() {
+    super.initState();
+    events.addEvent(new EventInstance("ree","ree",1,1));
+  }
   Widget build(BuildContext ctxt)
   {//signals that enemies are missing
     return Scaffold(
@@ -19,7 +28,6 @@ class eventsPage extends StatelessWidget {
               Container(
                 child:  Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                
                 children: <Widget>[
                   IconButton( //back button
                     icon:Icon(Icons.arrow_back),
@@ -49,14 +57,48 @@ class eventsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
                         child: new Column(
                           children: <Widget>[
-                            
-                              new EventLi(),
-
-                              // for(int i = 0; i< events.size(); i++){
-                              //   new EventLi();
-                              // }
+                            new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("do stuff", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
                           ],
+                          ),
+                          new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("rocks", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
+                          ],
+                          ),
+                          new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("yes", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
+                          ],
+                          ),
+                          ],
+                          
                         ),
+                        /*child:new ListView.builder
+                        (
+                          itemCount: events.size(),
+                          itemBuilder: (BuildContext ctxt, int index) {
+                            print("index $index");
+                            return new EventLi(even: events.getValue(index));
+                            // return new EventLi(new EventInstance("ree","ree",1,1));
+                          }
+                        )*/
                     ),
                     SizedBox(height: 25,),
                     Row(
@@ -70,19 +112,8 @@ class eventsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
                         child: new Column(
                           children: <Widget>[
-                            new Row(  //put in another file xd
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                              Text("Do Some Hw", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                              SizedBox(),
-                              SizedBox(),  //xd idk abt this
-                              SizedBox(),
-                              
-                              Text(".", textAlign: TextAlign.right, style: TextStyle(fontSize: 24),),
-
-                              
-                            ],
-                            ),
+                            new EventLi(),
+                       
                           ],
                         ),
                     ),
@@ -100,7 +131,7 @@ class eventsPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
             onPressed:(){
-              events.addEvent(new NewEvent("owo","uwu",2,2));
+              events.addEvent(new EventInstance("oworeee","uwu",2,2));
             },
             child: Icon(Icons.add),
              backgroundColor: Colors.pink[200],
