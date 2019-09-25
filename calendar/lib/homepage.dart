@@ -1,30 +1,38 @@
+
 import 'package:flutter/material.dart';
-//import 'package:calendar/calendar.dart';
-//import 'calendar/index.dart';
-
-//import 'package:flutter/material.dart';
-
 import 'package:calendar/flutter_calendar_carousel.dart'
 show CalendarCarousel;
 import 'package:calendar/classes/event.dart';
 import 'package:calendar/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:calendar/eventsPage.dart';
-import 'package:swipedetector/swipedetector.dart';
+import 'package:calendar/event.dart';
+class MyPageView extends StatefulWidget {
+  MyPageView({Key key}) : super(key: key);
 
-class CalHome extends StatefulWidget {
-  @override 
-  _CalHomeState createState() => _CalHomeState(); // notices cow's bulge ,,,OwO,,, slowly unzips pants as cows udders begin to drip
-  //List<int> tempArray = new List();
+  _MyPageViewState createState() => _MyPageViewState();
 }
 
- CalendarCarousel _calendarCarouselNoHeader;
-class _CalHomeState extends State<CalHome>{
- 
-  @override
+CalendarCarousel _calendarCarouselNoHeader;
 
-  Widget build (BuildContext ctxt) {
-     _calendarCarouselNoHeader = CalendarCarousel<Event>(
+class _MyPageViewState extends State<MyPageView> {
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  
+  Widget build(BuildContext context) {
+    _calendarCarouselNoHeader = CalendarCarousel<Event>(
       todayBorderColor: Colors.green,
       weekendTextStyle: TextStyle(
         color: Colors.red,
@@ -48,13 +56,24 @@ class _CalHomeState extends State<CalHome>{
       selectedDayTextStyle: TextStyle(
         color: Colors.yellow,
       ),
-  );
-    return new Scaffold(
-      body: (
-        Center(
-          child: SwipeDetector(  
-          child: Container(
-          width: double.infinity,
+    );
+
+    return MaterialApp(
+      home: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          children: [
+            //  onPressed: () {
+//                     if (_pageController.hasClients) {
+//                       _pageController.animateToPage(
+//                         1,
+//                         duration: const Duration(milliseconds: 400),
+//                         curve: Curves.easeInOut,
+//                       );
+//                     }
+//                   },
+          Container(
+             width: double.infinity,
           constraints: BoxConstraints.expand(),
           padding: EdgeInsets.only(left: 15, right: 15),
           child: ListView(
@@ -76,12 +95,13 @@ class _CalHomeState extends State<CalHome>{
               Container(
                 padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
                 decoration: customcard(),
-                child: Column(children: <Widget>[
-                  Text("September", style: TextStyle(fontSize: 21),),
-                  new SizedBox(height: 10,),
-                  _calendarCarouselNoHeader,
-                ],) 
-                
+                child: Column(
+                  children: <Widget>[
+                    Text("September", style: TextStyle(fontSize: 21),),
+                    new SizedBox(height: 10,),
+                    _calendarCarouselNoHeader,
+                  ],
+                ) 
               ),
               Container(
                 child: MaterialButton(
@@ -89,67 +109,148 @@ class _CalHomeState extends State<CalHome>{
                   color: Colors.pink[200],
                   shape: StadiumBorder(),
                   elevation: 2,
-                  onPressed: (){
-                    Navigator.push(
-                      ctxt,
-                      SlideRightRoute(page: eventsPage()),
-                    );
-                  }
+                  onPressed: () {
+                    if (_pageController.hasClients) {
+                      _pageController.animateToPage(
+                        1,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
                 ),
               ),
-              //new TempCal(title: "ree",),
-              // ListView.builder(
-              //   itemCount: tempArray.length,
-              //   itemBuilder: (BuildContext context, int index){
-              //     return Card(
-              //       child: Column(children: <Widget>[
-              //         const ListTile(
-              //             title: Text("Month Name index"),
-              //           ),
-              //         ],),
-              //       );
-              //   }
-              // )
             ],
           ),
-             
-         ),
-          onSwipeLeft: () {
-             Navigator.push(
-                      ctxt,
-                      SlideRightRoute(page: eventsPage()),
-                    );
-          }
-        ) 
-        )  
-      )
+          ),  
+            Container(
+             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
+          constraints: BoxConstraints.expand(),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                child:  Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  IconButton( //back button
+                    icon:Icon(Icons.arrow_back),
+                   onPressed: () {
+                    if (_pageController.hasClients) {
+                      _pageController.animateToPage(
+                        0,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                  ), 
+                  SizedBox(width:90, height: 0),
+                  Text("Overview", textAlign: TextAlign.center,style:TextStyle(fontSize:25)),
+                ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 5, top: 5, right: 5),
+                child: new Column(
+                  children: <Widget>[
+                    Divider(height: 4.0, color: Colors.black,),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                      Text("Today", textAlign: TextAlign.left, style: TextStyle(fontSize: 24),),
+                    ],),
+                    SizedBox(height: 10,),
+                    new Container(
+                        decoration: customcard(),
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
+                        child: new Column(
+                          children: <Widget>[
+                            new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("do stuff", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
+                          ],
+                          ),
+                          new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("rocks", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
+                          ],
+                          ),
+                          new Row(  //put in another file xd
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                            Text("yes", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
+                            Spacer(),
+                            new CircleButton(onTap: () => print("Cool")),
+                            new SizedBox(width:30),
+                            new CircleButton(onTap: () => print("Cool")),
+                          ],
+                          ),
+                          ],
+                          
+                        ),
+                        /*child:new ListView.builder
+                        (
+                          itemCount: events.size(),
+                          itemBuilder: (BuildContext ctxt, int index) {
+                            print("index $index");
+                            return new EventLi(even: events.getValue(index));
+                            // return new EventLi(new EventInstance("ree","ree",1,1));
+                          }
+                        )*/
+                    ),
+                    SizedBox(height: 25,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                      Text("Upcoming", textAlign: TextAlign.left, style: TextStyle(fontSize: 24),),
+                    ],),
+                    SizedBox(height: 10,),
+                    new Container(
+                        decoration: customcard(),
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
+                        child: new Column(
+                          children: <Widget>[
+                            new EventLi(),
+                       
+                          ],
+                        ),
+                    ),
+
+                    
+                  ],
+                  
+                ),
+              )
+            ],
+        
+      
+        ), 
+        
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+            onPressed:(){
+              //events.addEvent(new EventInstance("oworeee","uwu",2,2));
+            },
+            child: Icon(Icons.add),
+             backgroundColor: Colors.pink[200],
+       ), 
+      ),
+      
     );
   }
-}
-class SlideRightRoute extends PageRouteBuilder {
-  final Widget page;
-  SlideRightRoute({this.page})
-      : super(
-          pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) =>
-              page,
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) =>
-              SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(1, 0),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              ),
-        );
 }
 
 BoxDecoration customcard(){
