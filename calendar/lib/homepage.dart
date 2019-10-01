@@ -6,6 +6,7 @@ import 'package:calendar/classes/event.dart';
 import 'package:calendar/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:calendar/event.dart';
+
 class MyPageView extends StatefulWidget {
   MyPageView({Key key}) : super(key: key);
 
@@ -33,13 +34,13 @@ class _MyPageViewState extends State<MyPageView> {
   
   Widget build(BuildContext context) {
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      todayBorderColor: Colors.green,
+      todayBorderColor: Colors.teal,
       weekendTextStyle: TextStyle(
         color: Colors.red,
       ),
       thisMonthDayBorderColor: Colors.grey,
       weekFormat: false,
-      height: 420.0,
+      height: 420.0, //nice
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       markedDateShowIcon: true,
       markedDateIconMaxShown: 2,
@@ -63,65 +64,56 @@ class _MyPageViewState extends State<MyPageView> {
         body: PageView(
           controller: _pageController,
           children: [
-            //  onPressed: () {
-//                     if (_pageController.hasClients) {
-//                       _pageController.animateToPage(
-//                         1,
-//                         duration: const Duration(milliseconds: 400),
-//                         curve: Curves.easeInOut,
-//                       );
-//                     }
-//                   },
           Container(
-             width: double.infinity,
-          constraints: BoxConstraints.expand(),
-          padding: EdgeInsets.only(left: 15, right: 15),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                child: Column(children: <Widget>[
-                  Image.asset('assets/temp_bg.png'),
-                  Text("Good Morning StresDevs", 
-                    textAlign: TextAlign.center, 
-                    style: TextStyle(fontSize: 25), 
-                  ),
-                  Text("You have 5 tasks today", 
-                    textAlign: TextAlign.center, 
-                    style: TextStyle(fontSize: 20,color: Colors.grey), 
-                  ),
-                ],)
-              ),
-              SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
-                decoration: customcard(),
-                child: Column(
-                  children: <Widget>[
-                    Text("September", style: TextStyle(fontSize: 21),),
-                    new SizedBox(height: 10,),
-                    _calendarCarouselNoHeader,
-                  ],
-                ) 
-              ),
-              Container(
-                child: MaterialButton(
-                  child: Text("View Details"),
-                  color: Colors.pink[200],
-                  shape: StadiumBorder(),
-                  elevation: 2,
-                  onPressed: () {
-                    if (_pageController.hasClients) {
-                      _pageController.animateToPage(
-                        1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
+            width: double.infinity,
+            constraints: BoxConstraints.expand(),
+            padding: EdgeInsets.only(left: 15, right: 15),
+            child: ListView( 
+              children: <Widget>[
+                Container(
+                  child: Column(children: <Widget>[                 //header
+                    Image.asset('assets/temp_bg.png'),
+                    Text("Good Morning StresDevs", 
+                      textAlign: TextAlign.center, 
+                      style: TextStyle(fontSize: 25), 
+                    ),
+                    Text("You have 5 tasks today", 
+                      textAlign: TextAlign.center, 
+                      style: TextStyle(fontSize: 20,color: Colors.grey), 
+                    ),
+                  ],)
                 ),
-              ),
-            ],
-          ),
+                SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                  decoration: customcard(),
+                  child: Column(
+                    children: <Widget>[
+                      Text("September", style: TextStyle(fontSize: 21),),
+                      new SizedBox(height: 10,),
+                      _calendarCarouselNoHeader,
+                    ],
+                  ) 
+                ),
+                Container(
+                  child: MaterialButton(
+                    child: Text("View Details"),
+                    color: Colors.pink[200],
+                    shape: StadiumBorder(),
+                    elevation: 2,
+                    onPressed: () {
+                      if (_pageController.hasClients) {
+                        _pageController.animateToPage(
+                          1,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),  
             Container(
              padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
@@ -163,51 +155,7 @@ class _MyPageViewState extends State<MyPageView> {
                     SizedBox(height: 10,),
                     new Container(
                         decoration: customcard(),
-                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
-                        child: new Column(
-                          children: <Widget>[
-                            new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("do stuff", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("rocks", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("yes", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          ],
-                          
-                        ),
-                        /*child:new ListView.builder
-                        (
-                          itemCount: events.size(),
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            print("index $index");
-                            return new EventLi(even: events.getValue(index));
-                            // return new EventLi(new EventInstance("ree","ree",1,1));
-                          }
-                        )*/
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20), 
                     ),
                     SizedBox(height: 25,),
                     Row(
@@ -219,15 +167,8 @@ class _MyPageViewState extends State<MyPageView> {
                     new Container(
                         decoration: customcard(),
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
-                        child: new Column(
-                          children: <Widget>[
-                            new EventLi(),
-                       
-                          ],
-                        ),
+                        child: new EventDisplay(),
                     ),
-
-                    
                   ],
                   
                 ),
@@ -240,12 +181,11 @@ class _MyPageViewState extends State<MyPageView> {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
+        //expanding pink button on the bottom right 
+        floatingActionButton: FancyFab(    
             onPressed:(){
               //events.addEvent(new EventInstance("oworeee","uwu",2,2));
             },
-            child: Icon(Icons.add),
-             backgroundColor: Colors.pink[200],
        ), 
       ),
       
@@ -256,7 +196,7 @@ class _MyPageViewState extends State<MyPageView> {
 BoxDecoration customcard(){
   return BoxDecoration(
     border: Border.all(
-      color: Color.fromRGBO(234, 234, 234,1),
+      color: Color.fromRGBO(234, 234, 234,1), //gray
       width: 2,
     ),
   
