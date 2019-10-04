@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:calendar/flutter_calendar_carousel.dart'
 show CalendarCarousel;
@@ -70,10 +69,11 @@ class _MyPageViewState extends State<MyPageView> {
             padding: EdgeInsets.only(left: 15, right: 15),
             child: ListView( 
               children: <Widget>[
+                
                 Container(
                   child: Column(children: <Widget>[                 //header
                     Image.asset('assets/temp_bg.png'),
-                    Text("Good Morning StresDevs", 
+                    Text("Good Morning Calvin Chen <3 <3 <3 !!", 
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 25), 
                     ),
@@ -89,7 +89,7 @@ class _MyPageViewState extends State<MyPageView> {
                   decoration: customcard(),
                   child: Column(
                     children: <Widget>[
-                      Text("September", style: TextStyle(fontSize: 21),),
+                      Text("October", style: TextStyle(fontSize: 21),),
                       new SizedBox(height: 10,),
                       _calendarCarouselNoHeader,
                     ],

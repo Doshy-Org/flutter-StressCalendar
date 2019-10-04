@@ -200,7 +200,7 @@ class _FancyFabState extends State<FancyFab>
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _buttonColor = ColorTween(
-      begin: Colors.pink[100],
+      begin: Colors.pink[200],
       end: Colors.red,
     ).animate(CurvedAnimation(
       parent: _animationController,
@@ -242,6 +242,7 @@ class _FancyFabState extends State<FancyFab>
   Widget add() {
     return Container(
       child: FloatingActionButton(
+        backgroundColor: Colors.blue[400],
         onPressed:(){
           setState(() {
             
@@ -257,9 +258,10 @@ class _FancyFabState extends State<FancyFab>
   Widget image() {
     return Container(
       child: FloatingActionButton(
+        backgroundColor: Colors.blue[400],
         onPressed: null,
         tooltip: 'Image',
-        child: Icon(Icons.image),
+        child: Icon(Icons.dns),
       ),
     );
   }
@@ -267,9 +269,10 @@ class _FancyFabState extends State<FancyFab>
   Widget inbox() {
     return Container(
       child: FloatingActionButton(
+        backgroundColor: Colors.blue[400],
         onPressed: null,
         tooltip: 'Inbox',
-        child: Icon(Icons.inbox),
+        child: Icon(Icons.book),
       ),
     );
   }

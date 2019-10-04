@@ -112,7 +112,7 @@ class _eventsPageState extends State<eventsPage>  {
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
                         child: new Column(
                           children: <Widget>[
-                            new EventLi(),
+                            //new EventLi(),
                        
                           ],
                         ),
