@@ -11,5 +11,7 @@ class _journalPageState extends State<journalPage>  {
    void initState() {
     super.initState();
   }
+
+  
 }
 
