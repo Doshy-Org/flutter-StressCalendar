@@ -1,27 +1,17 @@
-import 'package:calendar/classes/event.dart';
 import 'package:flutter/material.dart';
-import 'package:calendar/event.dart';
+import 'package:calendar/classes/event.dart';
+class event extends StatefulWidget{
+  _event createState() => _event();
 
-class eventsPage extends StatefulWidget{
-  @override
-  State createState() => new _eventsPageState();
 }
-class _eventsPageState extends State<eventsPage>  {
 
-  EventList events = new EventList();
+class _event extends State<event>{
 
   @override
-   void initState() {
-    super.initState();
-    events.addEvent(new EventInstance("ree","ree",1,1));
-  }
-  Widget build(BuildContext ctxt)
-  {//signals that enemies are missing
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: 
-        Container(
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return  Container(
+             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
           constraints: BoxConstraints.expand(),
           child: ListView(
             children: <Widget>[
@@ -31,9 +21,15 @@ class _eventsPageState extends State<eventsPage>  {
                 children: <Widget>[
                   IconButton( //back button
                     icon:Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(ctxt).pop();
-                    },
+                   onPressed: () {
+                    // if (_pageController.hasClients) {
+                    //   _pageController.animateToPage(
+                    //     0,
+                    //     duration: const Duration(milliseconds: 400),
+                    //     curve: Curves.easeInOut,
+                    //   );
+                    // }
+                  },
                   ), 
                   SizedBox(width:90, height: 0),
                   Text("Overview", textAlign: TextAlign.center,style:TextStyle(fontSize:25)),
@@ -54,51 +50,7 @@ class _eventsPageState extends State<eventsPage>  {
                     SizedBox(height: 10,),
                     new Container(
                         decoration: customcard(),
-                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
-                        child: new Column(
-                          children: <Widget>[
-                            new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("do stuff", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("rocks", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          new Row(  //put in another file xd
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                            Text("yes", textAlign: TextAlign.left, style: TextStyle(fontSize: 20),),
-                            Spacer(),
-                            new CircleButton(onTap: () => print("Cool")),
-                            new SizedBox(width:30),
-                            new CircleButton(onTap: () => print("Cool")),
-                          ],
-                          ),
-                          ],
-                          
-                        ),
-                        /*child:new ListView.builder
-                        (
-                          itemCount: events.size(),
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            print("index $index");
-                            return new EventLi(even: events.getValue(index));
-                            // return new EventLi(new EventInstance("ree","ree",1,1));
-                          }
-                        )*/
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20), 
                     ),
                     SizedBox(height: 25,),
                     Row(
@@ -110,34 +62,27 @@ class _eventsPageState extends State<eventsPage>  {
                     new Container(
                         decoration: customcard(),
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
-                        child: new Column(
-                          children: <Widget>[
-                            //new EventLi(),
-                       
-                          ],
-                        ),
+                       // child: new EventDisplay(),
                     ),
-
-                    
                   ],
                   
                 ),
               )
-            ],
-        
-      
-        ), 
-        
-      ),
-      floatingActionButton: FloatingActionButton(
-            onPressed:(){
-              events.addEvent(new EventInstance("oworeee","uwu",2,2));
-            },
-            child: Icon(Icons.add),
-             backgroundColor: Colors.pink[200],
-       ), 
+            ]
+          )
     );
-
-
   }
+
+
+}
+
+ BoxDecoration customcard(){
+  return BoxDecoration(
+    border: Border.all(
+      color: Color.fromRGBO(234, 234, 234,1), //gray
+      width: 2,
+    ),
+  
+    borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+  );
 }

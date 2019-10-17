@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calendar/homepage.dart';
 import 'package:calendar/drawer.dart';
 void main() => runApp(MyApp());
 
@@ -11,9 +10,9 @@ class MyApp extends StatelessWidget{
     return new MaterialApp(
       title:'Calendar',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        //brightness: Brightness.dark,
       ),
-      home: Home(),//CalHome(), 
+      home: MyHomePage(),//CalHome(), 
     );
   }
 }

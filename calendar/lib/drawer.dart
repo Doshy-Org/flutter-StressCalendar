@@ -1,343 +1,149 @@
 
 import 'package:flutter/material.dart';
-import 'package:calendar/homepage.dart';
-class Home extends StatefulWidget {
 
+import 'package:calendar/eventsPage.dart';
+import 'package:calendar/mainpage.dart';
+import 'package:calendar/journalPage.dart';
 
- @override
-
-
- _HomeState createState() => _HomeState();
-
-
+class _Page {
+  _Page({this.widget});
+  final StatefulWidget widget;
 }
 
-
-class _HomeState extends State<Home> {
-
-
- PageController _pageController;
-
-
- int _page = 0;
-
-
- List drawerItems = [
-
-
-   {
-
-
-     "icon": Icons.add,
-
-
-     "name": "New Post",
-
-
-   },
-
-
-   {
-
-
-     "icon": Icons.delete,
-
-
-     "name": "Delete Post",
-
-
-   },
-
-
- ];
-
-
-
-
-
-
-
- @override
-
-
- Widget build(BuildContext context) {
-
-
-   return Scaffold(
-
-
-
-
-
-
-
-     appBar: AppBar(
-
-
-       title: Text("Drawers demo"),
-
-
-     ),
-
-
-     drawer: Drawer(
-
-
-       child: ListView(
-
-
-         children: <Widget>[
-
-
-           DrawerHeader(
-
-
-             child: Text(
-
-
-               "DRAWER HEADER..",
-
-
-               style: TextStyle(
-
-
-                 color: Colors.white
-
-
-               ),
-
-
-             ),
-
-
-             decoration: BoxDecoration(
-
-
-               color: Theme.of(context).primaryColor,
-
-
-             ),
-
-
-           ),
-
-
-
-
-
-
-
-
-
-
-
-
-           ListView.builder(
-
-
-             physics: NeverScrollableScrollPhysics(),
-
-
-             shrinkWrap: true,
-
-
-             itemCount: drawerItems.length,
-
-
-             itemBuilder: (BuildContext context, int index) {
-
-
-               Map item = drawerItems[index];
-
-
-               return ListTile(
-
-
-                 leading: Icon(
-
-
-                   item['icon'],
-
-
-                   color: _page == index
-
-
-                       ?Theme.of(context).primaryColor
-
-
-                       :Theme.of(context).textTheme.title.color,
-
-
-                 ),
-
-
-                 title: Text(
-
-
-                   item['name'],
-
-
-                   style: TextStyle(
-
-
-                     color: _page == index
-
-
-                         ?Theme.of(context).primaryColor
-
-
-                         :Theme.of(context).textTheme.title.color,
-
-
-                   ),
-
-
-                 ),
-
-
-                 onTap: (){
-
-
-                   _pageController.jumpToPage(index);
-
-
-                   Navigator.pop(context);
-
-
-                 },
-
-
-               );
-
-
-             },
-
-
-
-
-
-
-
-           ),
-
-
-         ],
-
-
-       ),
-
-
-     ),
-
-
-
-
-
-
-
-     body: PageView(
-
-
-       physics: NeverScrollableScrollPhysics(),
-
-
-       controller: _pageController,
-
-
-       onPageChanged: onPageChanged,
-
-
-       children: <Widget>[
-
-
-         MyPageView(),
-
-
-       ],
-
-
-     ),
-
-
-   );
-
-
- }
-
-
-
-
-
-
-
- void navigationTapped(int page) {
-
-
-   _pageController.jumpToPage(page);
-
-
- }
-
-
-
-
-
-
-
- @override
-
-
- void initState() {
-
-
-   super.initState();
-
-
-   _pageController = PageController(initialPage: 0);
-
-
- }
-
-
-
-
-
-
-
- @override
-
-
- void dispose() {
-
-
-   super.dispose();
-
-
-   _pageController.dispose();
-
-
- }
-
-
-
-
-
-
-
- void onPageChanged(int page) {
-
-
-   setState(() {
-
-
-     _page = page;
-
-
-   });
-
-
- }
-
-
+List<_Page> _allPages = <_Page>[
+  _Page(widget: journalPage()),
+  _Page(widget: home()),
+  _Page(widget: event()),
+];
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(vsync: this, length: _allPages.length);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      floatingActionButton: FloatingActionButton(
+        elevation: 4.0,
+        child: Icon(Icons.add),
+        //icon: const Icon(Icons.add),
+        //label: const Text('Add a task'),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: Stack(
+        children: <Widget>[
+           TabBarView(
+          controller: _controller,
+          children: _allPages.map<Widget>((_Page page) {
+            return SafeArea(
+              top: false,
+              bottom: false,
+              child: Container(
+                  key: ObjectKey(page.widget),
+                  child: page.widget),
+            );
+          }).toList()),
+       /* bottomNavigationBar: BottomAppBar(
+        elevation: 0.0,
+        color: Color(0x00000000),
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: () {
+                  _showModal();
+                }),
+          ],
+        ),
+      ),*/
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Container(
+            color: Colors.blue.withOpacity(0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () {
+                      _showModal();
+                    }),
+              ],
+            ),
+          ),
+        ),
+      
+        ],
+      ) 
+     
+      
+    );
+  }
+
+  void _showModal() {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              new ListTile(
+                leading: new Icon(Icons.grid_on),
+                title: new Text('Journal'),
+                onTap: () {
+                  _controller.animateTo(0);
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile(
+                leading: new Icon(Icons.calendar_today),
+                title: new Text('Home'),
+                onTap: () {
+                  _controller.animateTo(1);
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile(
+                leading: new Icon(Icons.list),
+                title: new Text('Tasks'),
+                onTap: () {
+                  _controller.animateTo(2);
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile( //not complete
+                leading: new Icon(Icons.settings),
+                title: new Text('Options'),
+                onTap: () {
+                  _controller.animateTo(2);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+}
