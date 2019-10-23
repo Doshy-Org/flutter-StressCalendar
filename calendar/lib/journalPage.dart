@@ -8,7 +8,6 @@ class _journalPageState extends State<journalPage>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return  Container(
              padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
           constraints: BoxConstraints.expand(),
@@ -31,7 +30,7 @@ class _journalPageState extends State<journalPage>{
                   },
                   ), 
                   SizedBox(width:90, height: 0),
-                  Text("Overview", textAlign: TextAlign.center,style:TextStyle(fontSize:25)),
+                  Text("Journal", textAlign: TextAlign.center,style:TextStyle(fontSize:25)),
                 ],
                 ),
               ),

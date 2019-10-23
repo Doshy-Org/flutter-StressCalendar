@@ -6,14 +6,14 @@ import 'package:calendar/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:calendar/event.dart';
 
-class home extends StatefulWidget{
+class Home extends StatefulWidget{
   _home createState() => _home();
 
 }
 
 CalendarCarousel _calendarCarouselNoHeader;
 
-class _home extends State<home>{
+class _home extends State<Home>{
   
   @override
   Widget build(BuildContext context) {
@@ -72,23 +72,6 @@ class _home extends State<home>{
                       _calendarCarouselNoHeader,
                     ],
                   ), 
-                ),
-                 Container(
-                  child: MaterialButton(
-                    child: Text("View Details"),
-                    color: Colors.pink[200],
-                    shape: StadiumBorder(),
-                    elevation: 2,
-                    onPressed: () {
-                      /*if (_pageController.hasClients) {
-                        _pageController.animateToPage(
-                          1,
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.easeInOut,
-                        );
-                      }*/
-                    },
-                  ),
                 ),
                 SizedBox(height: 50,)
            ],

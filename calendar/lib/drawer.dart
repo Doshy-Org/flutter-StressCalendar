@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:calendar/eventsPage.dart';
 import 'package:calendar/mainpage.dart';
 import 'package:calendar/journalPage.dart';
+import 'package:calendar/event.dart';
 
 class _Page {
   _Page({this.widget});
@@ -12,8 +13,8 @@ class _Page {
 
 List<_Page> _allPages = <_Page>[
   _Page(widget: journalPage()),
-  _Page(widget: home()),
-  _Page(widget: event()),
+  _Page(widget: Home()),
+  _Page(widget: TodoList()),
 ];
 
 class MyHomePage extends StatefulWidget {
@@ -42,11 +43,12 @@ class _MyHomePageState extends State<MyHomePage>
 
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         elevation: 4.0,
-        child: Icon(Icons.add),
+       child: Icon(Icons.add),
         //icon: const Icon(Icons.add),
-        //label: const Text('Add a task'),
+        //label: const Text('Add'),
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -63,21 +65,7 @@ class _MyHomePageState extends State<MyHomePage>
                   child: page.widget),
             );
           }).toList()),
-       /* bottomNavigationBar: BottomAppBar(
-        elevation: 0.0,
-        color: Color(0x00000000),
-        child: new Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  _showModal();
-                }),
-          ],
-        ),
-      ),*/
+
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
