@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
  
-class _EventList{
-  List<String> _todoItems = [];
-  
-  String get(int index){
-    return _todoItems[index];
-  }
-
-  int length(){
-    return _todoItems.length;
-  }
-  
-
-}
-
 BoxDecoration customcard(){
   return BoxDecoration(
     border: Border.all(
@@ -26,21 +12,31 @@ BoxDecoration customcard(){
 
 
 class CircleButton extends StatelessWidget {
-  final GestureTapCallback onTap;
+  // final GestureTapCallback onTap;
   //final Color col;
-
-  const CircleButton({Key key, this.onTap}) : super(key: key);
-
+  final int col;
+  // const CircleButton({Key key, this.col, this.onTap}) : super(key: key);
+  const CircleButton(this.col);
+  
   @override
   Widget build(BuildContext context) {
+    Color coll;
     double size = 20.0;
+    switch (col) {
+      case 1: coll = Colors.green; break;
+      case 2: coll = Colors.limeAccent; break;
+      case 3: coll = Colors.yellow; break;
+      case 4: coll = Colors.orange; break;
+      case 5: coll = Colors.red; break;
+      default: coll = Colors.black;
+    }
     return new InkResponse(
-      onTap: onTap,
+      // onTap: onTap,
       child: new Container(
         width: size,
         height: size,
         decoration: new BoxDecoration(
-          color: Colors.green,
+          color: coll,
           shape: BoxShape.circle,
         ),
       ),

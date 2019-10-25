@@ -1,77 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:calendar/addJournalEntry.dart';
+
 class journalPage extends StatefulWidget{
   _journalPageState createState() => _journalPageState();
 
 }
 
-class _journalPageState extends State<journalPage>{
+class _journalPageState extends State<journalPage>
+{
 
   @override
-  Widget build(BuildContext context) {
-    return  Container(
-             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 16.0),
-          constraints: BoxConstraints.expand(),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                child:  Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton( //back button
-                    icon:Icon(Icons.arrow_back),
-                   onPressed: () {
-                    // if (_pageController.hasClients) {
-                    //   _pageController.animateToPage(
-                    //     0,
-                    //     duration: const Duration(milliseconds: 400),
-                    //     curve: Curves.easeInOut,
-                    //   );
-                    // }
-                  },
-                  ), 
-                  SizedBox(width:90, height: 0),
-                  Text("Journal", textAlign: TextAlign.center,style:TextStyle(fontSize:25)),
-                ],
+  Widget build(BuildContext context) 
+  {
+    return MaterialApp
+    (
+      home : Scaffold
+      (
+        appBar: AppBar
+        (
+          title: Text('Journal'),
+          backgroundColor: Colors.pinkAccent,
+        ),
+        body: ListView.builder
+        (
+          itemBuilder: (BuildContext ctxt, int journalPosition,)
+          {
+              return Dismissible
+              (
+                key: Key('strOnK'),
+                background: Container
+                (
+                  color: Colors.red,
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 5, top: 5, right: 5),
-                child: new Column(
-                  children: <Widget>[
-                    Divider(height: 4.0, color: Colors.black,),
-                    SizedBox(height: 10,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                      Text("Today", textAlign: TextAlign.left, style: TextStyle(fontSize: 24),),
-                    ],),
-                    SizedBox(height: 10,),
-                    new Container(
-                        decoration: customcard(),
-                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20), 
-                    ),
-                    SizedBox(height: 25,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                      Text("Upcoming", textAlign: TextAlign.left, style: TextStyle(fontSize: 24),),
-                    ],),
-                    SizedBox(height: 10,),
-                    new Container(
-                        decoration: customcard(),
-                        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
-                       // child: new EventDisplay(),
-                    ),
-                  ],
-                  
-                ),
-              )
-            ]
-          )
+                onDismissed: (DismissDirection swipedDir)
+                {
+                },
+              );
+               floatingActionButton: FloatingActionButton(
+          elevation: 6.0,
+          onPressed: () {
+
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return addJournalEntry();
+            })).then((_) {
+
+            });
+          },
+          child: Icon(Icons.edit),
+          backgroundColor: Theme.of(context).primaryColor,
+           );
+          },
+        ),
+      ),
     );
   }
-
-
 }
 
  BoxDecoration customcard(){
