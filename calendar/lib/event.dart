@@ -12,19 +12,18 @@ BoxDecoration customcard(){
 
 
 class CircleButton extends StatelessWidget {
-  // final GestureTapCallback onTap;
-  //final Color col;
+  //  final GestureTapCallback onTap;
   final int col;
-  // const CircleButton({Key key, this.col, this.onTap}) : super(key: key);
+  //  const CircleButton({Key key, /*this.col,*/ this.onTap}) : super(key: key);
   const CircleButton(this.col);
   
   @override
   Widget build(BuildContext context) {
     Color coll;
-    double size = 20.0;
+     double size = 20.0;
     switch (col) {
       case 1: coll = Colors.green; break;
-      case 2: coll = Colors.limeAccent; break;
+      case 2: coll = Colors.lime; break;
       case 3: coll = Colors.yellow; break;
       case 4: coll = Colors.orange; break;
       case 5: coll = Colors.red; break;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
-
+import 'dart:math';
 EventList list = new EventList();
 
 class TodoList extends StatefulWidget {
@@ -10,10 +10,6 @@ class TodoList extends StatefulWidget {
  
 class TodoListState extends State<TodoList> {
   
-  
-  //should be on drawer page for correct access stuff
-
-
   Widget _buildTodoList() {
     return new ListView.builder(
       itemBuilder: (context, index) {
@@ -32,14 +28,11 @@ class TodoListState extends State<TodoList> {
     return new Card(
       child: new Row(
         children: <Widget>[
-          new Text(ei.getTitle()),
+          new Text(ei.getTitle()+"\t"),
           new Text(ei.getDescription()),
-          new CircleButton(ei.getImportance()),
+          new Spacer(),
           new CircleButton(ei.getStress()),
-          new CircleButton(3),
-          new CircleButton(4),
-          new CircleButton(5),
-
+          new CircleButton(ei.getImportance()),
         ],
       ),
     );
@@ -48,29 +41,28 @@ class TodoListState extends State<TodoList> {
   @override  
 
   Widget build(BuildContext context) {
+    Random rng = new Random();
     return new Scaffold(
-      body:
-        new Container(
-          child: Column(
-            children: <Widget>[
-              new TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter a search term'
-                ),
-              ),
-             new Container(
-               child:  _buildTodoList(),
-             ),
-            
-            ],
-          )
-        ),
+      body: Stack(
+        children: <Widget>[
+          _buildTodoList(),
+          Container( 
+            child: TextField(
+  decoration: InputDecoration(
+    //border: InputBorder.none,
+    hintText: 'Enter a search term'
+  ),
+),
+          ),
+        ],
+      ),
       
       floatingActionButton: new FloatingActionButton(
         onPressed:(){    
           setState(() {
-            list.addEvent(new EventInstance("reee", "owo", 1, 2));
-            print("press");
+            _showModal();
+            //list.addEvent(new EventInstance("reee", "owo", rng.nextInt(5)+1, rng.nextInt(5)+1));
+            //print("press");
           });
         },
         tooltip: 'Add task',
@@ -78,4 +70,51 @@ class TodoListState extends State<TodoList> {
       ),
     );
   }
+    void _showModal() {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              new ListTile(
+                leading: new Icon(Icons.grid_on),
+                title: new Text('Journal'),
+                onTap: () {
+                  
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile(
+                leading: new Icon(Icons.calendar_today),
+                title: new Text('Home'),
+                onTap: () {
+                  
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile(
+                leading: new Icon(Icons.list),
+                title: new Text('Tasks'),
+                onTap: () {
+                
+                  Navigator.pop(context);
+                },
+              ),
+              new ListTile( //not complete
+                leading: new Icon(Icons.settings),
+                title: new Text('Options'),
+                onTap: () {
+                  
+                  Navigator.pop(context);
+                },
+              ),
+              
+            ],
+          );
+        });
+  }
 }
+
+
+////////////////////https://medium.com/flutter-community/flutter-beginners-guide-to-using-the-bottom-sheet-b8025573c433

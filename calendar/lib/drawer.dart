@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import 'package:calendar/eventsPage.dart';
 import 'package:calendar/mainpage.dart';
 import 'package:calendar/journalPage.dart';
@@ -45,14 +44,14 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         elevation: 4.0,
        child: Icon(Icons.add),
         //icon: const Icon(Icons.add),
         //label: const Text('Add'),
         onPressed: () {},
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,*/
       body: Stack(
         children: <Widget>[
            TabBarView(
@@ -70,10 +69,12 @@ class _MyHomePageState extends State<MyHomePage>
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
+            width: 50,
             color: Colors.blue.withOpacity(0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              
               children: <Widget>[
                 IconButton(
                     icon: Icon(Icons.menu),
@@ -131,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage>
                   Navigator.pop(context);
                 },
               ),
+              
             ],
           );
         });
