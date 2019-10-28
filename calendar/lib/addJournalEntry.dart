@@ -77,6 +77,7 @@ Widget _buildTitle()
     {
       journalEntryForm['journal_title'] = title;
     },
+    decoration: InputDecoration(hintText: 'Your Title'),
   );
 }
 
@@ -95,7 +96,7 @@ Widget _buildEntry()
     {
       journalEntryForm['journal_entry'] = entry;
     },
-    decoration: InputDecoration(hintText: 'Your Title'),
+    decoration: InputDecoration(hintText: 'Your Journal Entry'),
   );
 }
 Widget build(BuildContext ctxt)
@@ -104,8 +105,8 @@ Widget build(BuildContext ctxt)
     (
       appBar: AppBar(
         title: Text('Create Journal'),
+        backgroundColor: Colors.pinkAccent,
         actions: <Widget>[
-          IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border),)
         ],
       ),
       body: page(ctxt),

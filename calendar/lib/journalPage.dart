@@ -58,10 +58,14 @@ class _journalPageState extends State<journalPage>
                     title: Text(dummyJournals[journalPosition]['head'], style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
                     subtitle: Text(dummyJournals[journalPosition]['date']),
                     ),
-                ],
+                    Divider()
+  ],
               ),
-              );
-               floatingActionButton: FloatingActionButton(
+            );
+          },
+          itemCount: dummyJournals.length,
+        ),
+        floatingActionButton: FloatingActionButton(
           elevation: 6.0,
           onPressed: () {
 
@@ -74,21 +78,8 @@ class _journalPageState extends State<journalPage>
           },
           child: Icon(Icons.edit),
           backgroundColor: Theme.of(context).primaryColor,
-           );
-          },
         ),
       ),
     );
   }
-}
-
- BoxDecoration customcard(){
-  return BoxDecoration(
-    border: Border.all(
-      color: Color.fromRGBO(234, 234, 234,1), //gray
-      width: 2,
-    ),
-  
-    borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
-  );
 }
