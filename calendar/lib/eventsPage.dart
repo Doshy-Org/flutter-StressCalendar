@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
 import 'dart:math';
 EventList list = new EventList();
-
+int tempStress;
+int tempImport;
 class TodoList extends StatefulWidget {
   @override
   createState() => new TodoListState();
@@ -41,26 +42,14 @@ class TodoListState extends State<TodoList> {
   @override  
 
   Widget build(BuildContext context) {
-    Random rng = new Random();
     return new Scaffold(
-      body: Stack(
-        children: <Widget>[
+      body: 
           _buildTodoList(),
-          Container( 
-            child: TextField(
-  decoration: InputDecoration(
-    //border: InputBorder.none,
-    hintText: 'Enter a search term'
-  ),
-),
-          ),
-        ],
-      ),
       
       floatingActionButton: new FloatingActionButton(
         onPressed:(){    
           setState(() {
-            _showModal();
+            _showInput();
             //list.addEvent(new EventInstance("reee", "owo", rng.nextInt(5)+1, rng.nextInt(5)+1));
             //print("press");
           });
@@ -70,51 +59,26 @@ class TodoListState extends State<TodoList> {
       ),
     );
   }
-    void _showModal() {
+    void _showInput() {
     showModalBottomSheet<void>(
+      
         context: context,
         builder: (BuildContext context) {
-          return new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              new ListTile(
-                leading: new Icon(Icons.grid_on),
-                title: new Text('Journal'),
-                onTap: () {
-                  
-                  Navigator.pop(context);
-                },
+           return new TextField(
+              autofocus: true,
+              onSubmitted: (val) {
+                setState(() {
+                   list.addEvent(new EventInstance(val, val, 0, 0));
+                });
+               
+                Navigator.pop(context); // Close the add todo screen
+              },
+              decoration: new InputDecoration(
+                hintText: 'Enter something to do...',
+                contentPadding: const EdgeInsets.all(16.0)
               ),
-              new ListTile(
-                leading: new Icon(Icons.calendar_today),
-                title: new Text('Home'),
-                onTap: () {
-                  
-                  Navigator.pop(context);
-                },
-              ),
-              new ListTile(
-                leading: new Icon(Icons.list),
-                title: new Text('Tasks'),
-                onTap: () {
-                
-                  Navigator.pop(context);
-                },
-              ),
-              new ListTile( //not complete
-                leading: new Icon(Icons.settings),
-                title: new Text('Options'),
-                onTap: () {
-                  
-                  Navigator.pop(context);
-                },
-              ),
-              
-            ],
-          );
-        });
+        );
   }
+    );
 }
-
-
-////////////////////https://medium.com/flutter-community/flutter-beginners-guide-to-using-the-bottom-sheet-b8025573c433
+}
