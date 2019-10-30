@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:calendar/journalPage.dart';
 class addJournalEntry extends StatefulWidget
 {
   @override
@@ -13,8 +13,8 @@ class _addJournalEntryState extends State<addJournalEntry>
 {
   final Map<String, String> journalEntryForm =
   {
-    'journal_title': null,
-    'journal_entry': null,
+    'journal_title': "ree",
+    'journal_entry': "owo",
   };
 
   final GlobalKey<FormState> _addJournalGlobalKey = GlobalKey<FormState>();
@@ -110,6 +110,15 @@ Widget build(BuildContext ctxt)
         ],
       ),
       body: page(ctxt),
+
+      floatingActionButton: FloatingActionButton(
+          elevation: 6.0,
+          onPressed: () {
+            journals.add(journalEntryForm);
+          },
+          child: Icon(Icons.edit),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
     );
   }
 }
