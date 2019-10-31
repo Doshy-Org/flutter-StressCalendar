@@ -5,15 +5,7 @@ class journalPage extends StatefulWidget{
   _journalPageState createState() => _journalPageState();
 
 }
-List<Map<String, String>> journals = [
-    {'head': 'Bounced Date', 'date': '14-Feb-019'},
-    {'head': 'Flutter Study jam', 'date': '17-March-019'},
-    {'head': 'Movie previews', 'date': '21-May-018'},
-    {'head': 'Amazing assessment results', 'date': '16-Feb-019'},
-    {'head': 'Travel and adventure', 'date': '30-Dec-018'},
-    {'head': 'Meeting new catch', 'date': '01-Aug-017'},
-    {'head': 'Crazy shoping', 'date': '14-Feb-016'}
-  ];
+List<Map<String, String>> journals = new List<Map<String,String>>();
 class _journalPageState extends State<journalPage>
 {
 
@@ -28,7 +20,7 @@ class _journalPageState extends State<journalPage>
         appBar: AppBar
         (
           title: Text('Journal'),
-          backgroundColor: Colors.pinkAccent,
+          backgroundColor: Colors.black54,
         ),
         body: ListView.builder
         (
@@ -36,7 +28,7 @@ class _journalPageState extends State<journalPage>
           {
               return Dismissible
               (
-                key: Key(journals[journalPosition]['head']),
+                key: Key(journals[journalPosition]['journal_title']),
                 background: Container
                 (
                   color: Colors.red,
@@ -51,11 +43,11 @@ class _journalPageState extends State<journalPage>
                 children: <Widget>[
                   ListTile(
                     leading: CircleAvatar(
-                      child: Text(journals[journalPosition]['head'][0], style: TextStyle(color: Colors.deepOrange, fontSize: 18.0),),
+                      child: Text(journals[journalPosition]['journal_title'][0], style: TextStyle(color: Colors.black38, fontSize: 18.0),),
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    title: Text(journals[journalPosition]['head'], style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
-                    subtitle: Text(journals[journalPosition]['date']),
+                    title: Text(journals[journalPosition]['journal_title'], style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
+                    subtitle: Text(journals[journalPosition]['journal_entry']),
                     ),
                     Divider()
   ],

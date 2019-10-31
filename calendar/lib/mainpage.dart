@@ -55,7 +55,7 @@ class _home extends State<Home>{
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 25), 
                     ),
-                    Text("You have 5 tasks today", 
+                    Text("You have 5 tasks", 
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 20,color: Colors.grey), 
                     ),

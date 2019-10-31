@@ -13,8 +13,8 @@ class _addJournalEntryState extends State<addJournalEntry>
 {
   final Map<String, String> journalEntryForm =
   {
-    'journal_title': "ree",
-    'journal_entry': "owo",
+    'journal_title': "",
+    'journal_entry': "",
   };
 
   final GlobalKey<FormState> _addJournalGlobalKey = GlobalKey<FormState>();
@@ -105,7 +105,7 @@ Widget build(BuildContext ctxt)
     (
       appBar: AppBar(
         title: Text('Create Journal'),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.black54,
         actions: <Widget>[
         ],
       ),
@@ -114,10 +114,21 @@ Widget build(BuildContext ctxt)
       floatingActionButton: FloatingActionButton(
           elevation: 6.0,
           onPressed: () {
-            journals.add(journalEntryForm);
+            if(_addJournalGlobalKey.currentState.validate())
+            {
+              _addJournalGlobalKey.currentState.save();
+              journals.add(journalEntryForm);
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                return journalPage();
+              })).then((_) {
+
+              });
+            }
           },
-          child: Icon(Icons.edit),
+          child: Icon(Icons.check),
           backgroundColor: Theme.of(context).primaryColor,
+
+         
         ),
     );
   }
