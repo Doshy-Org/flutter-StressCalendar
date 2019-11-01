@@ -104,7 +104,8 @@ Widget build(BuildContext ctxt)
     return Scaffold
     (
       appBar: AppBar(
-        title: Text('Create Journal'),
+        title: Text('Create Journal',
+                    style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black54,
         actions: <Widget>[
         ],

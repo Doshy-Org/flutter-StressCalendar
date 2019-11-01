@@ -1,3 +1,4 @@
+import 'package:calendar/addEventEntry.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
 import 'dart:math';
@@ -49,9 +50,14 @@ class TodoListState extends State<TodoList> {
       floatingActionButton: new FloatingActionButton(
         onPressed:(){    
           setState(() {
-            _showInput();
+            // _showInput();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return addEventEntry();
+            })).then((_) {
+
+            });
             //list.addEvent(new EventInstance("reee", "owo", rng.nextInt(5)+1, rng.nextInt(5)+1));
-            //print("press");
           });
         },
         tooltip: 'Add task',
@@ -59,26 +65,27 @@ class TodoListState extends State<TodoList> {
       ),
     );
   }
-    void _showInput() {
+  void _showInput() {
     showModalBottomSheet<void>(
-      
-        context: context,
-        builder: (BuildContext context) {
-           return new TextField(
-              autofocus: true,
-              onSubmitted: (val) {
-                setState(() {
-                   list.addEvent(new EventInstance(val, val, 0, 0));
-                });
-               
-                Navigator.pop(context); // Close the add todo screen
-              },
-              decoration: new InputDecoration(
-                hintText: 'Enter something to do...',
-                contentPadding: const EdgeInsets.all(16.0)
-              ),
+    
+      context: context,
+      builder: (BuildContext context) {
+        return new TextField(
+          autofocus: true,
+          onSubmitted: (val) {
+            setState(() {
+              list.addEvent(new EventInstance(val, val, 0, 0));
+              print(list.toString());
+            });
+            
+            Navigator.pop(context); // Close the add todo screen
+          },
+          decoration: new InputDecoration(
+            hintText: 'Enter something to do...',
+            contentPadding: const EdgeInsets.all(16.0)
+          ),
         );
-  }
+      }
     );
-}
+  }
 }

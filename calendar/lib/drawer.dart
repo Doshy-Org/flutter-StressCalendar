@@ -4,6 +4,7 @@ import 'package:calendar/eventsPage.dart';
 import 'package:calendar/mainpage.dart';
 import 'package:calendar/journalPage.dart';
 import 'package:calendar/event.dart';
+import 'package:calendar/addJournalEntry.dart';
 
 class _Page {
   _Page({this.widget});
@@ -14,6 +15,7 @@ List<_Page> _allPages = <_Page>[
   _Page(widget: journalPage()),
   _Page(widget: Home()),
   _Page(widget: TodoList()),
+  _Page(widget: addJournalEntry()),
 ];
 
 class MyHomePage extends StatefulWidget {
