@@ -20,7 +20,7 @@ class CircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color coll;
-     double size = 20.0;
+     double size = 21.0;
     switch (col) {
       case 1: coll = Colors.green; break;
       case 2: coll = Colors.lime; break;

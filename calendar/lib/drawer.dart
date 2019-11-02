@@ -15,7 +15,7 @@ List<_Page> _allPages = <_Page>[
   _Page(widget: journalPage()),
   _Page(widget: Home()),
   _Page(widget: TodoList()),
-  _Page(widget: addJournalEntry()),
+  //_Page(widget: addJournalEntry()),
 ];
 
 class MyHomePage extends StatefulWidget {

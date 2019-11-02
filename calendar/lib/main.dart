@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         //brightness: Brightness.dark,
 
-        primaryColor: Colors.teal[100],
+        primaryColor: Colors.blue,
       ),
       home: MyHomePage(),//CalHome(), 
     );

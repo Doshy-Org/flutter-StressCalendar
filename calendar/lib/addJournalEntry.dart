@@ -94,6 +94,7 @@ Widget _buildEntry()
     },
     onSaved: (String entry)
     {
+      print("saved");
       journalEntryForm['journal_entry'] = entry;
     },
     decoration: InputDecoration(hintText: 'Your Journal Entry'),
@@ -119,11 +120,12 @@ Widget build(BuildContext ctxt)
             {
               _addJournalGlobalKey.currentState.save();
               journals.add(journalEntryForm);
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                return journalPage();
-              })).then((_) {
+              // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+              //   return journalPage();
+              // })).then((_) {
 
-              });
+              // });
+              Navigator.pop(context); 
             }
           },
           child: Icon(Icons.check),
