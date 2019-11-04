@@ -62,6 +62,9 @@ class EventList{
   {
     events.remove(ree);
   }
+  void deleteIndex(int index){
+    events.removeAt(index);
+  }
   int size()
   {
     return events.length;

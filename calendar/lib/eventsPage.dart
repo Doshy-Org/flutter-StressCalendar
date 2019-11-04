@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
 EventList list = new EventList();
+
 double  tempStress;
 int tempImport;
 
@@ -31,7 +32,11 @@ class TodoListState extends State<TodoList> {
 
   // Build a single todo item
   Widget _buildTodoItem(EventInstance ei, int index) {
-      return new Column(
+      return new GestureDetector(
+        onTap: (){
+          _promptRemoveTodoItem(index);
+        },
+        child: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(10),
@@ -48,10 +53,39 @@ class TodoListState extends State<TodoList> {
           ),
           Divider(),
         ],
+      ),
       );
-     
-     
   }
+   void _removeTodoItem(int index) {
+    setState(() => list.deleteIndex(index));
+  }
+
+  void _promptRemoveTodoItem(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text('Mark ${list.getValue(index).getTitle()} as done?'),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text('CANCEL'),
+              // The alert is actually part of the navigation stack, so to close it, we
+              // need to pop it.
+              onPressed: () => Navigator.of(context).pop()
+            ),
+            new FlatButton(
+              child: new Text('MARK AS DONE'),
+              onPressed: () {
+                _removeTodoItem(index);
+                Navigator.of(context).pop();
+              }
+            )
+          ]
+        );
+      }
+    );
+  }
+  
 
   @override  
 
@@ -59,6 +93,7 @@ class TodoListState extends State<TodoList> {
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0.0,
         title: new Text("To Do List", style: TextStyle(color: Colors.black),),
@@ -72,9 +107,6 @@ class TodoListState extends State<TodoList> {
             tempTitle = "";
             tempDesc = "";
             _showInput();
-            
-            //list.addEvent(new EventInstance("reee", "owo", rng.nextInt(5)+1, rng.nextInt(5)+1));
-            //print("press");
           });
         },
         tooltip: 'Add task',
@@ -132,61 +164,23 @@ class TodoListState extends State<TodoList> {
                       ],
                     ),
                   ),
-                  // new Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //     children: <Widget>[
-                  //       new IconButton(
-                  //         icon: new Icon(Icons.radio_button_unchecked, color: Colors.green,),                
-                  //         color: Colors.green,
-                  //         onPressed:(){
-                  //           setState(() {
-                  //             tempStress =1;
-                  //           });
-                  //         } 
-                  //       ),
-                  //       new IconButton(
-                  //         icon: new Icon(Icons.radio_button_unchecked, color: Colors.lime,),  
-                  //         color: Colors.lime,
-                  //         onPressed:(){
-                  //           setState(() {
-                  //             tempStress =2;
-                  //           });
-                  //         } 
-                  //       ),
-                  //       new IconButton(
-                  //         icon: new Icon(Icons.radio_button_unchecked, color: Colors.yellow,),
-                  //         color: Colors.yellow,
-                  //         onPressed:(){
-                  //           setState(() {
-                  //             tempStress =3;
-                  //           });
-                  //         } 
-                  //       ),
-                  //       new IconButton(
-                  //         icon: new Icon(Icons.radio_button_unchecked, color: Colors.orange,),
-                  //         color: Colors.orange,
-                  //         onPressed:(){
-                  //           setState(() {
-                  //             tempStress =4;
-                  //           });
-                  //         } 
-                  //       ),
-                  //       new IconButton(
-                  //         icon: new Icon(Icons.radio_button_unchecked, color: Colors.red,),
-                  //         color: Colors.red,
-                  //         onPressed:(){
-                  //           setState(() {
-                  //             tempStress =5;
-                  //           });
-                  //         } 
-                  //       ),
-                  //     ],
-                  //   ),
-                  Slider(min: 0.0, max: 5.0, divisions: 5, value: tempStress, onChanged:(double val){
-                    setState(() {
-                     tempStress = val; 
-                    });
-                  } ,),
+                  new Row( //stress
+                     mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                     new Radio(
+                       value: 0,
+                       groupValue: tempStress,
+                     ),
+                     new Radio(
+                       value: 0,
+                       groupValue: tempStress,
+                     ),
+                     new Radio(
+                       value: 0,
+                       groupValue: tempStress,
+                     )
+                    ],
+                  ),
                     FlatButton(
                       child: Text("Add", style: new TextStyle(color: Colors.blue),),
                       onPressed: (){
