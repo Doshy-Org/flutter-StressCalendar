@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:calendar/eventsPage.dart';
 import 'package:calendar/mainpage.dart';
@@ -35,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     super.initState();
     _controller = TabController(vsync: this, length: _allPages.length);
+    _controller.animateTo(1);
   }
 
   @override
@@ -79,10 +79,11 @@ class _MyHomePageState extends State<MyHomePage>
               
               children: <Widget>[
                 IconButton(
-                    icon: Icon(Icons.menu),
-                    onPressed: () {
-                      _showModal();
-                    }),
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    _showModal();
+                  }
+                ),
               ],
             ),
           ),
@@ -99,43 +100,53 @@ class _MyHomePageState extends State<MyHomePage>
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
-          return new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              new ListTile(
-                leading: new Icon(Icons.grid_on),
-                title: new Text('Journal'),
-                onTap: () {
-                  _controller.animateTo(0);
-                  Navigator.pop(context);
-                },
+          return new Container(
+            color: Color(0xFF737373),
+            padding: EdgeInsets.all(10),
+            child: Container(
+              //padding: EdgeInsets.all(10),
+              decoration: new BoxDecoration( 
+                color: Colors.white,
+                borderRadius: new BorderRadius.all(Radius.circular(10.0)),
               ),
-              new ListTile(
-                leading: new Icon(Icons.calendar_today),
-                title: new Text('Home'),
-                onTap: () {
-                  _controller.animateTo(1);
-                  Navigator.pop(context);
-                },
+              child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new ListTile(
+                  leading: new Icon(Icons.grid_on),
+                  title: new Text('Journal'),
+                  onTap: () {
+                    _controller.animateTo(0);
+                    Navigator.pop(context);
+                  },
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.calendar_today),
+                  title: new Text('Home'),
+                  onTap: () {
+                    _controller.animateTo(1);
+                    Navigator.pop(context);
+                  },
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.list),
+                  title: new Text('Tasks'),
+                  onTap: () {
+                    _controller.animateTo(2);
+                    Navigator.pop(context);
+                  },
+                ),
+                new ListTile( //not complete
+                  leading: new Icon(Icons.settings),
+                  title: new Text('Options'),
+                  onTap: () {
+                    _controller.animateTo(2);
+                    Navigator.pop(context);
+                  },
+                ),
+                ],
               ),
-              new ListTile(
-                leading: new Icon(Icons.list),
-                title: new Text('Tasks'),
-                onTap: () {
-                  _controller.animateTo(2);
-                  Navigator.pop(context);
-                },
-              ),
-              new ListTile( //not complete
-                leading: new Icon(Icons.settings),
-                title: new Text('Options'),
-                onTap: () {
-                  _controller.animateTo(2);
-                  Navigator.pop(context);
-                },
-              ),
-              
-            ],
+            ),
           );
         });
   }

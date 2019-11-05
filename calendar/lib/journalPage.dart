@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:calendar/addJournalEntry.dart';
+import 'package:calendar/journalEntry.dart';
 
 class journalPage extends StatefulWidget{
   _journalPageState createState() => _journalPageState();
 
 }
-List<Map<String, String>> journals = new List<Map<String,String>>();
+// List<Map<String, String>> journals = new List<Map<String,String>>();
+List<journalEntry> journals = new List<journalEntry>();
 class _journalPageState extends State<journalPage>
 {
 
@@ -28,7 +30,7 @@ class _journalPageState extends State<journalPage>
           {
               return Dismissible
               (
-                key: Key(journals[journalPosition]['journal_title']),
+                key: Key(journals[journalPosition].getTitle()),
                 background: Container
                 (
                   color: Colors.red,
@@ -43,11 +45,11 @@ class _journalPageState extends State<journalPage>
                 children: <Widget>[
                   ListTile(
                     leading: CircleAvatar(
-                      child: Text(journals[journalPosition]['journal_title'][0], style: TextStyle(color: Colors.black38, fontSize: 18.0),),
+                      child: Text(journals[journalPosition].getDate().substring(8,10), style: TextStyle(color: Colors.white, fontSize: 18.0),),
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    title: Text(journals[journalPosition]['journal_title'], style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
-                    subtitle: Text(journals[journalPosition]['journal_entry']),
+                    title: Text(journals[journalPosition].getTitle(), style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
+                    subtitle: Text(journals[journalPosition].getEntry()),
                     ),
                     Divider()
   ],

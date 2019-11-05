@@ -6,6 +6,10 @@ import 'package:calendar/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:calendar/event.dart';
 
+DateTime now = DateTime.now();
+String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+String formattedMonth = DateFormat('MMMM').format(now);
+
 class Home extends StatefulWidget{
   _home createState() => _home();
 
@@ -67,7 +71,7 @@ class _home extends State<Home>{
                   decoration: customcard(),
                   child: Column(
                     children: <Widget>[
-                      Text("October", style: TextStyle(fontSize: 21),),
+                      Text(formattedMonth, style: TextStyle(fontSize: 21),),
                       new SizedBox(height: 10,),
                       _calendarCarouselNoHeader,
                     ],

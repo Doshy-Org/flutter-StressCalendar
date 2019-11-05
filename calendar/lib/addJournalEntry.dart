@@ -1,5 +1,8 @@
+import 'package:calendar/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar/journalPage.dart';
+import 'package:calendar/journalEntry.dart';
+
 class addJournalEntry extends StatefulWidget
 {
   @override
@@ -11,11 +14,9 @@ class addJournalEntry extends StatefulWidget
 
 class _addJournalEntryState extends State<addJournalEntry>
 {
-  final Map<String, String> journalEntryForm =
-  {
-    'journal_title': "",
-    'journal_entry': "",
-  };
+  String journal_title = "";
+  String journal_entry = "";
+  String journal_date = formattedDate;
 
   final GlobalKey<FormState> _addJournalGlobalKey = GlobalKey<FormState>();
 
@@ -75,7 +76,7 @@ Widget _buildTitle()
     },
     onSaved: (String title)
     {
-      journalEntryForm['journal_title'] = title;
+      journal_title = title;
     },
     decoration: InputDecoration(hintText: 'Your Title'),
   );
@@ -95,7 +96,7 @@ Widget _buildEntry()
     onSaved: (String entry)
     {
       print("saved");
-      journalEntryForm['journal_entry'] = entry;
+      journal_entry = entry;
     },
     decoration: InputDecoration(hintText: 'Your Journal Entry'),
   );
@@ -119,7 +120,7 @@ Widget build(BuildContext ctxt)
             if(_addJournalGlobalKey.currentState.validate())
             {
               _addJournalGlobalKey.currentState.save();
-              journals.add(journalEntryForm);
+              journals.add(new journalEntry(journal_title,journal_entry,journal_date));
               // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
               //   return journalPage();
               // })).then((_) {
