@@ -1,3 +1,6 @@
+//TODO: Blocky date ui on journal page, Months on journal page, blocks for each day on journal and add event for other days/
+//TODO: list all days
+
 import 'package:flutter/material.dart';
 import 'package:calendar/drawer.dart';
 import 'package:flutter/services.dart';

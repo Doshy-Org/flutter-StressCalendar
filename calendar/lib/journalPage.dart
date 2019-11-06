@@ -19,11 +19,13 @@ class _journalPageState extends State<journalPage>
     (
       home : Scaffold
       (
-        appBar: AppBar
-        (
-          title: Text('Journal'),
-          backgroundColor: Colors.black54,
-        ),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0.5,
+          title: new Text("Journal", style: TextStyle(color: Colors.black),),
+      ),
         body: ListView.builder
         (
           itemBuilder: (BuildContext ctxt, int journalPosition,)
@@ -43,16 +45,46 @@ class _journalPageState extends State<journalPage>
                 },
               child: Column(
                 children: <Widget>[
-                  ListTile(
-                    leading: CircleAvatar(
-                      child: Text(journals[journalPosition].getDate().substring(8,10), style: TextStyle(color: Colors.white, fontSize: 18.0),),
-                      backgroundColor: Theme.of(context).primaryColor,
+                  // ListTile(
+                  //   contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                  //   leading: CircleAvatar(
+                  //     child: Text(journals[journalPosition].getDate().substring(8,10), style: TextStyle(color: Colors.white, fontSize: 18.0),),
+                  //     backgroundColor: Theme.of(context).primaryColor,
+                  //   ),
+                  //   title: Text(journals[journalPosition].getTitle(), style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
+                  //   subtitle: Text(journals[journalPosition].getEntry()),
+                  //   ),
+                   SizedBox(      
+                      height: 100.0,
+                      child: new Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          new Container(
+                              decoration: new BoxDecoration(
+                                border: Border(bottom: BorderSide(color: Colors.grey[300])),
+                                color: Colors.blue,
+                              ),
+                              //color: Colors.blue,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: new Text(journals[journalPosition].getDate().substring(8,10), style: TextStyle(color: Colors.white, fontSize: 18.0)),
+                          ),
+                          new Expanded(
+                            child: new Container(
+                              decoration: new BoxDecoration(
+                                border: Border(bottom: BorderSide(color: Colors.grey[300]))
+                              ),
+                              child:  new ListTile(
+                              title: Text(journals[journalPosition].getTitle(), style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
+                              subtitle: Text(journals[journalPosition].getEntry()),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    title: Text(journals[journalPosition].getTitle(), style: TextStyle(fontFamily: 'Oswald',fontSize: 17.0),),
-                    subtitle: Text(journals[journalPosition].getEntry()),
-                    ),
-                    Divider()
-  ],
+                  
+                ],
               ),
             );
           },

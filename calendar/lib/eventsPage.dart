@@ -99,7 +99,19 @@ class TodoListState extends State<TodoList> {
         title: new Text("To Do List", style: TextStyle(color: Colors.black),),
       ),
       body: 
-          _buildTodoList(),
+      GestureDetector(
+        
+        onDoubleTap: () {
+          setState(() {
+            tempTitle = "";
+            tempDesc = "";
+            _showInput();
+            print("swipe");
+          });
+        },
+        child: _buildTodoList(),
+      ),
+          
       
       floatingActionButton: new FloatingActionButton(
         onPressed:(){    
