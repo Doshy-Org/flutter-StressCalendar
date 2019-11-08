@@ -64,7 +64,6 @@ class _journalPageState extends State<journalPage>
                                 border: Border(bottom: BorderSide(color: Colors.grey[300])),
                                 color: Colors.blue,
                               ),
-                              //color: Colors.blue,
                               alignment: Alignment.center,
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: new Text(journals[journalPosition].getDate().substring(8,10), style: TextStyle(color: Colors.white, fontSize: 18.0)),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
 EventList list = new EventList();
 
-double  tempStress;
+int tempStress;
 int tempImport;
 
 String tempTitle;
@@ -86,6 +86,7 @@ class TodoListState extends State<TodoList> {
     );
   }
   
+  
 
   @override  
 
@@ -127,6 +128,11 @@ class TodoListState extends State<TodoList> {
     );
   }
   void _showInput() {
+    void _handleRadioValueChange1(int value) {
+    setState(() {
+      tempStress = value;
+    });
+  }
     showModalBottomSheet<void>(
       isScrollControlled:true,
         context: context,
@@ -180,17 +186,33 @@ class TodoListState extends State<TodoList> {
                      mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                      new Radio(
-                       value: 0,
+                       value: 1,
                        groupValue: tempStress,
+                       onChanged: (int value) {
+                          setState(() { tempStress = value; });
+                       },
                      ),
                      new Radio(
-                       value: 0,
+                       value: 2,
                        groupValue: tempStress,
+                       onChanged: _handleRadioValueChange1,
                      ),
                      new Radio(
-                       value: 0,
+                       value: 3,
                        groupValue: tempStress,
-                     )
+                       onChanged: _handleRadioValueChange1,
+                     ),
+                     new Radio(
+                       value: 4,
+                       groupValue: tempStress,
+                       onChanged: _handleRadioValueChange1,
+                     ),
+                     new Radio(
+                       value: 5,
+                       groupValue: tempStress,
+                       onChanged: _handleRadioValueChange1,
+                     ),
+                     
                     ],
                   ),
                     FlatButton(
@@ -198,7 +220,7 @@ class TodoListState extends State<TodoList> {
                       onPressed: (){
                         setState(() {
                           _addEventFormKey.currentState.save();
-                          list.addEvent(new EventInstance(tempTitle, tempDesc, 0, 0));
+                          list.addEvent(new EventInstance(tempTitle, tempDesc, tempStress, tempStress));
                       });
                       Navigator.pop(context); // Close 
                       },
