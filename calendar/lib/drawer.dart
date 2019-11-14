@@ -99,14 +99,15 @@ class _MyHomePageState extends State<MyHomePage>
   void _showModal() {
     showModalBottomSheet<void>(
         context: context,
+        backgroundColor: Color.fromRGBO(0, 0, 0, 0),
         builder: (BuildContext context) {
           return new Container(
-            color: Color(0xFF737373),
+          
             padding: EdgeInsets.all(10),
             child: Container(
               //padding: EdgeInsets.all(10),
               decoration: new BoxDecoration( 
-                color: Colors.white,
+                color: Colors.white.withAlpha(10),
                 borderRadius: new BorderRadius.all(Radius.circular(10.0)),
               ),
               child: Column(

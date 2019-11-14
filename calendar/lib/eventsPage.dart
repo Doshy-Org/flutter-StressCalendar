@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calendar/event.dart';
+import 'dart:math';
 EventList list = new EventList();
 
 int tempStress;
@@ -7,6 +8,8 @@ int tempImport;
 
 String tempTitle;
 String tempDesc;
+
+var rng = new Random();
 //global ints for temp use
 final GlobalKey<FormState> _addEventFormKey = GlobalKey<FormState>();
 
@@ -32,7 +35,18 @@ class TodoListState extends State<TodoList> {
 
   // Build a single todo item
   Widget _buildTodoItem(EventInstance ei, int index) {
-      return new GestureDetector(
+    return Dismissible(
+      key: Key(list.getValue(index).getTitle()),
+      background: Container
+      (
+        color: Colors.red,
+      ),
+      onDismissed:(DismissDirection swipedDir){
+        setState(() {
+          list.deleteIndex(index);
+        });
+      },
+      child: new GestureDetector(
         onTap: (){
           _promptRemoveTodoItem(index);
         },
@@ -54,7 +68,9 @@ class TodoListState extends State<TodoList> {
           Divider(),
         ],
       ),
-      );
+      ), 
+    );
+      
   }
    void _removeTodoItem(int index) {
     setState(() => list.deleteIndex(index));
@@ -100,18 +116,23 @@ class TodoListState extends State<TodoList> {
         title: new Text("To Do List", style: TextStyle(color: Colors.black),),
       ),
       body: 
-      GestureDetector(
-        
-        onDoubleTap: () {
-          setState(() {
+      Container(
+        child: GestureDetector(
+        onVerticalDragUpdate: (swipe){
+            setState(() {
             tempTitle = "";
             tempDesc = "";
+            tempStress =rng.nextInt(4)+1;
+            tempImport = rng.nextInt(4)+1;
             _showInput();
             print("swipe");
           });
+          
         },
         child: _buildTodoList(),
       ),
+      ),
+     
           
       
       floatingActionButton: new FloatingActionButton(
@@ -119,6 +140,8 @@ class TodoListState extends State<TodoList> {
           setState(() {
             tempTitle = "";
             tempDesc = "";
+            tempStress = rng.nextInt(4)+1;
+            tempImport = rng.nextInt(4)+1;
             _showInput();
           });
         },
@@ -128,107 +151,182 @@ class TodoListState extends State<TodoList> {
     );
   }
   void _showInput() {
-    void _handleRadioValueChange1(int value) {
-    setState(() {
-      tempStress = value;
-    });
-  }
     showModalBottomSheet<void>(
       isScrollControlled:true,
         context: context,
+        backgroundColor: Color.fromRGBO(0, 0, 0, 0),
         builder: (BuildContext context) {
-          return new Container(  
-            height: MediaQuery.of(context).size.height*0.80,
-            color: Color(0xFF737373),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: new BoxDecoration( 
-                color: Colors.white,
-                borderRadius: new BorderRadius.only(
-                  topLeft: const Radius.circular(10.0),
-                  topRight: const Radius.circular(10.0)),
-              ),
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter state){
+              return Container(  
+              height: MediaQuery.of(context).size.height*0.80,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: new BoxDecoration( 
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.only(
+                    topLeft: const Radius.circular(10.0),
+                    topRight: const Radius.circular(10.0)),
+                ),
 
-              child:  Column(
-                children: <Widget>[
-                  SizedBox(height: 10),
-                  Text("Add Task", style: new TextStyle(fontSize: 22),),
+                child:  Column(
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    Text("Add Task", style: new TextStyle(fontSize: 22),),
 
-                  Form(
-                    key:_addEventFormKey,
-                    child: Column(
+                    Form(
+                      key:_addEventFormKey,
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                            autofocus: true,
+                            decoration: new InputDecoration(
+                              hintText: 'Enter something to do...',
+                              contentPadding: const EdgeInsets.all(16.0)
+                            ),
+                            onSaved: (String title){
+                              tempTitle = title;
+                              print("saved");
+                            },
+                          ),
+                          TextFormField(
+                            decoration: new InputDecoration(
+                              hintText: 'Enter Description',
+                              contentPadding: const EdgeInsets.all(16.0)
+                            ),
+                            onSaved: (String title){
+                              tempDesc = title;
+                            },
+                          ),
+                          
+                        ],
+                      ),
+                    ),
+                    new Row( //stress
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        TextFormField(
-                          autofocus: true,
-                          decoration: new InputDecoration(
-                            hintText: 'Enter something to do...',
-                            contentPadding: const EdgeInsets.all(16.0)
-                          ),
-                          onSaved: (String title){
-                            tempTitle = title;
-                            print("saved");
-                          },
-                        ),
-                        TextFormField(
-                          decoration: new InputDecoration(
-                            hintText: 'Enter Description',
-                            contentPadding: const EdgeInsets.all(16.0)
-                          ),
-                          onSaved: (String title){
-                            tempDesc = title;
-                          },
-                        ),
-                        
+                      new Text("Stress:", style: new TextStyle(fontSize: 18, color: Colors.grey[600]), ),
+                      new Radio(
+                        activeColor: Colors.green,
+                        value: 1,
+                        groupValue: tempStress,
+                        onChanged: (value){
+                          state((){
+                            tempStress = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 2,
+                        activeColor: Colors.lime,
+                        groupValue: tempStress,
+                        onChanged: (value){
+                          state((){
+                            tempStress = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 3,
+                        activeColor: Colors.yellow,
+                        groupValue: tempStress,
+                        onChanged: (value){
+                          state((){
+                            tempStress = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 4,
+                        activeColor: Colors.orange,
+                        groupValue: tempStress,
+                        onChanged: (value){
+                          state((){
+                            tempStress = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 5,
+                        activeColor: Colors.red,
+                        groupValue: tempStress,
+                        onChanged: (value){
+                          state((){
+                            tempStress = value;
+                          });
+                        },
+                      ),  
                       ],
                     ),
-                  ),
-                  new Row( //stress
-                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                     new Radio(
-                       value: 1,
-                       groupValue: tempStress,
-                       onChanged: (int value) {
-                          setState(() { tempStress = value; });
-                       },
-                     ),
-                     new Radio(
-                       value: 2,
-                       groupValue: tempStress,
-                       onChanged: _handleRadioValueChange1,
-                     ),
-                     new Radio(
-                       value: 3,
-                       groupValue: tempStress,
-                       onChanged: _handleRadioValueChange1,
-                     ),
-                     new Radio(
-                       value: 4,
-                       groupValue: tempStress,
-                       onChanged: _handleRadioValueChange1,
-                     ),
-                     new Radio(
-                       value: 5,
-                       groupValue: tempStress,
-                       onChanged: _handleRadioValueChange1,
-                     ),
-                     
-                    ],
-                  ),
-                    FlatButton(
-                      child: Text("Add", style: new TextStyle(color: Colors.blue),),
-                      onPressed: (){
-                        setState(() {
-                          _addEventFormKey.currentState.save();
-                          list.addEvent(new EventInstance(tempTitle, tempDesc, tempStress, tempStress));
-                      });
-                      Navigator.pop(context); // Close 
-                      },
+                    new Row( //stress
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                      new Text("Importance:", style: new TextStyle(fontSize: 18, color: Colors.grey[600]), ),
+                      new Radio(
+                        value: 1,
+                        groupValue: tempImport,
+                        onChanged: (value){
+                          state((){
+                            tempImport = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 2,
+                        groupValue: tempImport,
+                        onChanged: (value){
+                          state((){
+                            tempImport = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 3,
+                        groupValue: tempImport,
+                        onChanged: (value){
+                          state((){
+                            tempImport = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 4,
+                        groupValue: tempImport,
+                        onChanged: (value){
+                          state((){
+                            tempImport = value;
+                          });
+                        },
+                      ),
+                      new Radio(
+                        value: 5,
+                        groupValue: tempImport,
+                        onChanged: (value){
+                          state((){
+                            tempImport = value;
+                          });
+                        },
+                      ),
+                      
+                      ],
                     ),
-                  ],   
-                ),
-              ), 
-          );   
+                      FlatButton(
+                        child: Text("Add", style: new TextStyle(color: Colors.blue),),
+                        onPressed: (){
+                          setState(() {
+                            _addEventFormKey.currentState.save();
+                            list.addEvent(new EventInstance(tempTitle, tempDesc, tempStress, tempImport));
+                        });
+                        Navigator.pop(context); // Close 
+                        },
+                      ),
+                    ],   
+                  ),
+                ), 
+            );   
+            },
+          );
+          
        }
     );
   }

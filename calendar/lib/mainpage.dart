@@ -47,6 +47,13 @@ class _home extends State<Home>{
       ),
     );
   return Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [const Color(0xff3B93EF), const Color(0xffEB00EB)],
+      ),
+    ),
   width: double.infinity,
     constraints: BoxConstraints.expand(),
       padding: EdgeInsets.only(left: 15, right: 15),
