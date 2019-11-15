@@ -264,6 +264,7 @@ class TodoListState extends State<TodoList> {
                       new Text("Importance:", style: new TextStyle(fontSize: 18, color: Colors.grey[600]), ),
                       new Radio(
                         value: 1,
+                        activeColor: Colors.green,
                         groupValue: tempImport,
                         onChanged: (value){
                           state((){
@@ -273,6 +274,7 @@ class TodoListState extends State<TodoList> {
                       ),
                       new Radio(
                         value: 2,
+                        activeColor: Colors.lime,
                         groupValue: tempImport,
                         onChanged: (value){
                           state((){
@@ -282,6 +284,7 @@ class TodoListState extends State<TodoList> {
                       ),
                       new Radio(
                         value: 3,
+                        activeColor: Colors.yellow,
                         groupValue: tempImport,
                         onChanged: (value){
                           state((){
@@ -291,6 +294,7 @@ class TodoListState extends State<TodoList> {
                       ),
                       new Radio(
                         value: 4,
+                        activeColor: Colors.orange,
                         groupValue: tempImport,
                         onChanged: (value){
                           state((){
@@ -300,6 +304,7 @@ class TodoListState extends State<TodoList> {
                       ),
                       new Radio(
                         value: 5,
+                        activeColor: Colors.red,
                         groupValue: tempImport,
                         onChanged: (value){
                           state((){

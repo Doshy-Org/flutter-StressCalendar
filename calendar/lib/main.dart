@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget{
     return new MaterialApp(
       title:'Calendar',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        //brightness: Brightness.dark,
 
         primaryColor: Colors.blue,
       ),
