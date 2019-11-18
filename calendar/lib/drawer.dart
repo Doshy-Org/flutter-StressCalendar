@@ -4,6 +4,7 @@ import 'package:calendar/mainpage.dart';
 import 'package:calendar/journalPage.dart';
 import 'package:calendar/event.dart';
 import 'package:calendar/addJournalEntry.dart';
+import 'package:calendar/globals.dart';
 
 class _Page {
   _Page({this.widget});
@@ -33,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
+    weathernoises();
     _controller = TabController(vsync: this, length: _allPages.length);
     _controller.animateTo(1);
   }
@@ -44,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget build(BuildContext context) {
+    
     return new Scaffold(
       backgroundColor: Colors.white,
       /*floatingActionButton: FloatingActionButton(

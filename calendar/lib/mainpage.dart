@@ -1,30 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:calendar/flutter_calendar_carousel.dart'
 show CalendarCarousel;
 import 'package:calendar/classes/event.dart';
-import 'package:intl/intl.dart' show DateFormat;
-import 'package:weather/weather.dart';
-import 'dart:async';
-
-DateTime now = DateTime.now();
-String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
-String formattedMonth = DateFormat('MMMM').format(now);
-String currweather = '';
-double currtemp;
-void weathernoises() async
-{
-  WeatherStation weatherStation = new WeatherStation("8afefe5a7cf45d6d97405b23ca3a60b4");
-  Weather weather = await weatherStation.currentWeather();
-  print(weather.temperature.fahrenheit);
-  currtemp = weather.temperature.fahrenheit;
-  currweather = weather.weatherMain;
-}
+import 'package:calendar/globals.dart';
 class Home extends StatefulWidget{
   _home createState() => _home();
-
-
 }
 
 CalendarCarousel _calendarCarouselNoHeader;
@@ -33,8 +13,6 @@ class _home extends State<Home>{
   
   @override
   Widget build(BuildContext context) {
-    weathernoises();
-    print(currweather);
      _calendarCarouselNoHeader = CalendarCarousel<Event>(
       todayBorderColor: Colors.teal,
       weekendTextStyle: TextStyle(
@@ -80,7 +58,7 @@ class _home extends State<Home>{
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 25), 
                     ),
-                    Text("You have 5 tasks", 
+                    Text(weather.weatherMain+" " + (weather.temperature.fahrenheit).round().toString()+"°", 
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 20,color: Colors.grey), 
                     ),

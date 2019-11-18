@@ -1,7 +1,7 @@
-import 'package:calendar/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar/journalPage.dart';
 import 'package:calendar/journalEntry.dart';
+import 'package:calendar/globals.dart';
 
 class addJournalEntry extends StatefulWidget
 {
