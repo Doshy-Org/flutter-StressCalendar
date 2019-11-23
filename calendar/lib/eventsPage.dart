@@ -140,8 +140,8 @@ class TodoListState extends State<TodoList> {
           setState(() {
             tempTitle = "";
             tempDesc = "";
-            tempStress = rng.nextInt(4)+1;
-            tempImport = rng.nextInt(4)+1;
+            tempStress = 0;
+            tempImport = 0;
             _showInput();
           });
         },

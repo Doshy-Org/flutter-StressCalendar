@@ -58,10 +58,10 @@ class _home extends State<Home>{
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 25), 
                     ),
-                    Text(weather.weatherMain+" " + (weather.temperature.fahrenheit).round().toString()+"°", 
+                    weather != null ? Text(weather.weatherMain+" " + (weather.temperature.fahrenheit).round().toString()+"°", 
                       textAlign: TextAlign.center, 
                       style: TextStyle(fontSize: 20,color: Colors.grey), 
-                    ),
+                    ) : Text("Weather Data Loading..."),
                   ],)
                 ),
                 SizedBox(height: 20),
