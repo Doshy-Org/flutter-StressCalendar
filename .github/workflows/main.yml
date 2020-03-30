@@ -9,6 +9,6 @@ jobs:
       id: owo
       uses: phisv/crispy-octo-spork@master
       with:
-        who-to-owo: 'phisv'
+        who-to-owo: 'StressCal'
     - name: output time
       run: echo "The time was ${{ steps.owo.outputs.time }}"
