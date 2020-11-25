@@ -12,10 +12,14 @@ Base calendar code from https://github.com/dooboolab/flutter_calendar_carousel
 5. Allows users to organize and track stress & emotions to help improve their mental health and plan their life
 
 
-# Sort Tasks By Stress And Importance
+## Sort Tasks By Stress And Importance
 
 ![To Do List](https://raw.githubusercontent.com/remowote/flutter-StressCalendar/master/screenshots/scal2.png)
 
 ![Add Task](https://raw.githubusercontent.com/remowote/flutter-StressCalendar/master/screenshots/scal3.png)
 
-# Release Stress Through Journalism
+## Release Stress Through Journalism
+
+Journaling stressful life events and emotions for 15-20 minutes a day has proven to improve mental health, immune markers, and reduce stress. 
+
+![Journal](https://raw.githubusercontent.com/remowote/flutter-StressCalendar/master/screenshots/scal1.png)
